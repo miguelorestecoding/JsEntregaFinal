@@ -92,7 +92,11 @@ function validarFormularioImpuestos(event) {
   );
 
   if (nombreImpuesto === "" || isNaN(porcentajeImpuesto)) {
-    alert("Por favor completar todos los campos");
+    Swal.fire({
+      icon: "error",
+      title: "🤨 Parece que algo falta?",
+      text: "Recuerda ponerle nombre y procentaje al impuesto que estas creando!",
+    });
     formularioImpuestos.reset();
   } else if (!NombreImpuestoExiste) {
     let impuesto = new Impuesto(idImpuesto, nombreImpuesto, porcentajeImpuesto);
@@ -143,9 +147,11 @@ function validarFormularioDolares(event) {
     desmarcarCheckboxImpuestos();
     actulizaDolaresStorage();
   } else {
-    alert(
-      "Por favor revisa que estas ingresando un nombre valido para el Dolar y que haya al menos 1 impuesto seleccionado. Si no visualizas como seleccionar impuestos quizas debas primero crearlos."
-    );
+    Swal.fire({
+      icon: "error",
+      title: "🤨 Parece que algo falta?",
+      text: "Revisa que estés ingresando un nombre válido para el dolar y que haya al menos 1 impuesto seleccionado. Si no visualizas como seleccionar impuestos debes crearlos primero!",
+    });
   }
 }
 
