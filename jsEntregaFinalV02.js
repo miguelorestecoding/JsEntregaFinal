@@ -41,10 +41,9 @@ class Dolar {
 
 //Inicializa Elementos
 function inicializarElementos() {
-  // inputPrecioDolarBancoNacion = document.getElementById(
-  //   "inputPrecioDolarBancoNacion"
-  // );
-  obtieneDolarOficialDeDolarSi();
+  inputPrecioDolarBancoNacion = document.getElementById(
+    "inputPrecioDolarBancoNacion"
+  );
 
   formularioImpuestos = document.getElementById("formularioImpuestos");
   inputNombreImpuesto = document.getElementById("inputNombreImpuesto");
@@ -77,6 +76,11 @@ function validarFormularioPrecioDolarBancoNacion(event) {
   if (precioDolarBancoNacion == "") {
     alert("No ha ingresado un precio para el dolar valido, por favor revise.");
   } else {
+    const textoOrigenTipoDeCambio = document.getElementById(
+      "textoOrigenTipoDeCambio"
+    );
+    textoOrigenTipoDeCambio.innerText =
+      "☝ Tipo de Cambio Ingresado por el Usuario";
     pintarDolares();
   }
 }
@@ -167,7 +171,7 @@ function desmarcarCheckboxImpuestos() {
 //STORAGE
 //Actualiza Storage
 function actualizaDolarBancoNacionStorage() {
-  // precioDolarBancoNacion = inputPrecioDolarBancoNacion.value;
+  precioDolarBancoNacion = inputPrecioDolarBancoNacion.value;
   localStorage.setItem("precioDolarBancoNacion", precioDolarBancoNacion);
 }
 function actulizaImpuestosStorage() {
@@ -348,6 +352,7 @@ function eliminarDolar(idDolar) {
 
 //Función main
 function main() {
+  obtieneDolarOficialDeDolarSi();
   inicializarElementos();
   inicializarEventos();
   actualizaDolarBancoNacionStorage();
