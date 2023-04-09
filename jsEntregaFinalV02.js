@@ -358,6 +358,7 @@ function main() {
   actualizaDolarBancoNacionStorage();
   obtenerImpuestosStorage();
   obtenerDolaresStorage();
+  console.log(JSON.stringify(dolares));
 }
 
 //Ejecuta / Llama a main
