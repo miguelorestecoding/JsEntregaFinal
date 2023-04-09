@@ -41,9 +41,10 @@ class Dolar {
 
 //Inicializa Elementos
 function inicializarElementos() {
-  inputPrecioDolarBancoNacion = document.getElementById(
-    "inputPrecioDolarBancoNacion"
-  );
+  // inputPrecioDolarBancoNacion = document.getElementById(
+  //   "inputPrecioDolarBancoNacion"
+  // );
+  obtieneDolarOficialDeDolarSi();
 
   formularioImpuestos = document.getElementById("formularioImpuestos");
   inputNombreImpuesto = document.getElementById("inputNombreImpuesto");
@@ -166,7 +167,7 @@ function desmarcarCheckboxImpuestos() {
 //STORAGE
 //Actualiza Storage
 function actualizaDolarBancoNacionStorage() {
-  precioDolarBancoNacion = inputPrecioDolarBancoNacion.value;
+  // precioDolarBancoNacion = inputPrecioDolarBancoNacion.value;
   localStorage.setItem("precioDolarBancoNacion", precioDolarBancoNacion);
 }
 function actulizaImpuestosStorage() {
@@ -203,6 +204,33 @@ limpiarStorageBtn.addEventListener("click", function () {
   pintarImpuestos();
   pintarDolares();
 });
+
+// API Precio Dolar Actualizado
+let ultimaCotizacion = "";
+function obtieneDolarOficialDeDolarSi() {
+  const url = "https://www.dolarsi.com/api/api.php?type=dolar";
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Error en la solicitud: " + response.statusText);
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      precioDolarBancoNacion = parseFloat(data[0].casa.venta);
+      document.getElementById("inputPrecioDolarBancoNacion").value =
+        precioDolarBancoNacion;
+      pintarDolares();
+      // console.log("InputPrecioDolarBancoNacion:", inputPrecioDolarBancoNacion);
+      // console.log("precioDolarBancoNacion:", precioDolarBancoNacion);
+      // console.log(typeof precioDolarBancoNacion);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 //IMPUESTOS
 // Eliminar Impuestos
