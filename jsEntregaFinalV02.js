@@ -332,19 +332,4 @@ main();
 
 /* Pendiente
  * Si los nombres del dolar tienen espacio da error al querer pasar a JSON.
-
-// Proveedor de Cotizacion del Dolar
-/* Su TOKEN de acceso para el API es:
-eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTI0MTQ3OTgsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJtaWd1ZWxvcmVzdGVjb2RpbmdAZ21haWwuY29tIn0.xIOcRmbAiKhpsh6wtL5g5dkgPTDHI_KoTxee4xtDTsn5r_DdLFa7Y78s3yabdNCDaAoSwWVSpEZbJsThrDdlXQ
-
-El Header que debe agregar a sus requests al API es:
-Authorization: BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTI0MTQ3OTgsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJtaWd1ZWxvcmVzdGVjb2RpbmdAZ21haWwuY29tIn0.xIOcRmbAiKhpsh6wtL5g5dkgPTDHI_KoTxee4xtDTsn5r_DdLFa7Y78s3yabdNCDaAoSwWVSpEZbJsThrDdlXQ
-
-El TOKEN es valido hasta:
-2024-04-06 11:46:38
-
-DOCUMENTACION
-https://estadisticasbcra.com/api/documentacion
-https://api.estadisticasbcra.com/usd_of : cotización del USD Oficial
-
-*/
+ */
