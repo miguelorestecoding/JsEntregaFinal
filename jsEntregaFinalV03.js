@@ -198,6 +198,23 @@ function obtenerDolaresStorage() {
     pintarDolares();
   }
 }
+//Obtener desde .json
+function obtenerDolaresServer() {
+  fetch("./tiposDeDolar.json")
+    .then((response) => {
+      response.json();
+    })
+    .then((jsonResponse) => (dolares = jsonResponse));
+  pintarDolares();
+}
+
+function obtenerDolaresStorage() {
+  let dolaresJSON = localStorage.getItem("dolares");
+  if (dolaresJSON != null) {
+    dolares = JSON.parse(dolaresJSON);
+    pintarDolares();
+  }
+}
 
 //Limpiar Storage
 const limpiarStorageBtn = document.getElementById("limpiar-storage");
@@ -357,7 +374,8 @@ function main() {
   inicializarEventos();
   actualizaDolarBancoNacionStorage();
   obtenerImpuestosStorage();
-  obtenerDolaresStorage();
+  // obtenerDolaresStorage();
+  obtenerDolaresServer();
   console.log(JSON.stringify(dolares));
 }
 

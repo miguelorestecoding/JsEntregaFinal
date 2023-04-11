@@ -3,9 +3,9 @@
     "idDolar": 1,
     "NombreDolar": "Salidario",
     "ImpuestosAplicados": [
-      { "idImpuesto": 4, "nombreImpuesto": "PAIS", "porcentajeImpuesto": 30 },
+      { "idImpuesto": 1, "nombreImpuesto": "PAIS", "porcentajeImpuesto": 30 },
       {
-        "idImpuesto": 5,
+        "idImpuesto": 2,
         "nombreImpuesto": "GANANCIAS-35",
         "porcentajeImpuesto": 35
       }
@@ -16,9 +16,9 @@
     "idDolar": 2,
     "NombreDolar": "Netflix",
     "ImpuestosAplicados": [
-      { "idImpuesto": 4, "nombreImpuesto": "PAIS", "porcentajeImpuesto": 30 },
+      { "idImpuesto": 1, "nombreImpuesto": "PAIS", "porcentajeImpuesto": 30 },
       {
-        "idImpuesto": 6,
+        "idImpuesto": 3,
         "nombreImpuesto": "GANANCIAS-45",
         "porcentajeImpuesto": 45
       }
@@ -29,9 +29,9 @@
     "idDolar": 3,
     "NombreDolar": "Qatar",
     "ImpuestosAplicados": [
-      { "idImpuesto": 4, "nombreImpuesto": "PAIS", "porcentajeImpuesto": 30 },
+      { "idImpuesto": 1, "nombreImpuesto": "PAIS", "porcentajeImpuesto": 30 },
       {
-        "idImpuesto": 6,
+        "idImpuesto": 4,
         "nombreImpuesto": "GANANCIAS-45",
         "porcentajeImpuesto": 45
       },

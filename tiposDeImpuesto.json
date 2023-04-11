@@ -1,0 +1,18 @@
+[
+  { "idImpuesto": 1, "nombreImpuesto": "PAIS", "porcentajeImpuesto": 30 },
+  {
+    "idImpuesto": 2,
+    "nombreImpuesto": "GANANCIAS-35",
+    "porcentajeImpuesto": 35
+  },
+  {
+    "idImpuesto": 3,
+    "nombreImpuesto": "GANANCIAS-45",
+    "porcentajeImpuesto": 45
+  },
+  {
+    "idImpuesto": 4,
+    "nombreImpuesto": "BIENES-PERSONALES",
+    "porcentajeImpuesto": 25
+  }
+]
