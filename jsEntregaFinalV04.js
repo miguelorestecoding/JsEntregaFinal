@@ -7,7 +7,6 @@ let inputPrecioDolarBancoNacion;
 let precioDolarBancoNacion;
 
 let formularioImpuestos;
-// let contadorImpuestosId = 0;
 let inputNombreImpuesto;
 let inputPorcentajeImpuesto;
 let contenedorImpuestos;
@@ -89,8 +88,6 @@ function validarFormularioPrecioDolarBancoNacion(event) {
 function validarFormularioImpuestos(event) {
   event.preventDefault();
   let idImpuesto = parseInt(obtenerMaxIdImpuestos()) + 1
-  // contadorImpuestosId++;
-  // let idImpuesto = contadorImpuestosId;
   let nombreImpuesto = inputNombreImpuesto.value;
   let porcentajeImpuesto = parseInt(inputPorcentajeImpuesto.value);
   const NombreImpuestoExiste = impuestos.some(
@@ -334,7 +331,6 @@ function pintarDolares() {
   contenedorDolares.innerHTML = "";
   dolares.forEach((dolar) => {
     let column = document.createElement("div");
-    // let listaImpuestos = document.createElement("ul");
     column.className = "col-md-4 mt-3";
     column.id = `columnaDolar-${dolar.idDolar}`;
     column.innerHTML = `
