@@ -26,3 +26,7 @@ A la vez pueden crearse nuevos tipos de impuesto y nuevos tipos de dolares. Todo
 const idImpuestosServer = impuestos.map((impuesto)=> impuesto.idImpuesto)
       const maxIdImpuesto = Math.max(...idImpuestosServer)
       console.log(maxIdImpuesto)
+
+const idImpuestosStorage = impuestos.map((impuesto)=> impuesto.idImpuesto)
+      const maxIdImpuestoStorage = Math.max(...idImpuestosStorage)
+      return maxIdImpuestoStorage
