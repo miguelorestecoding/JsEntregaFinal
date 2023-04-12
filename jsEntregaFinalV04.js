@@ -12,7 +12,6 @@ let inputPorcentajeImpuesto;
 let contenedorImpuestos;
 
 let formularioDolares;
-let contadorDolaresId = 0;
 let inputNombreDolar;
 let inputImpuestosAplicados;
 let contenedorDolares;
@@ -123,8 +122,7 @@ function validarFormularioDolares(event) {
   checkboxesImpuestosAplicados.forEach((checkbox) => {
     inputImpuestosAplicados.push(JSON.parse(checkbox.value));
   });
-  contadorDolaresId++;
-  let idDolar = contadorDolaresId;
+  let idDolar = parseInt(obtenerMaxIdDolares()) + 1
   let nombreDolar = inputNombreDolar.value;
   let ImpuestosAplicados = inputImpuestosAplicados;
   let totalPorcentaje = 0;
@@ -185,6 +183,17 @@ function obtenerMaxIdImpuestos() {
   }
   return maxIdImpuestos
 }
+
+function obtenerMaxIdDolares() {
+  let maxIdDolares = 0
+  if (dolares.length > 0) {
+        const idDolares = dolares.map((dolar)=> dolares.idDolar)
+      maxIdDolares = Math.max(...idDolares) 
+  }
+  console.log(maxIdDolares)
+  return maxIdDolares
+}
+
 
 //Obtener desde Storage
 function obtenerImpuestosStorage() {
