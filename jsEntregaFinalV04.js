@@ -7,7 +7,7 @@ let inputPrecioDolarBancoNacion;
 let precioDolarBancoNacion;
 
 let formularioImpuestos;
-let contadorImpuestosId = 0;
+// let contadorImpuestosId = 0;
 let inputNombreImpuesto;
 let inputPorcentajeImpuesto;
 let contenedorImpuestos;
@@ -88,9 +88,9 @@ function validarFormularioPrecioDolarBancoNacion(event) {
 // Valida Formulario Impuestos
 function validarFormularioImpuestos(event) {
   event.preventDefault();
-  obtenerMaxIdImpuestosStorage()
-  contadorImpuestosId++;
-  let idImpuesto = contadorImpuestosId;
+  let idImpuesto = parseInt(obtenerMaxIdImpuestos()) + 1
+  // contadorImpuestosId++;
+  // let idImpuesto = contadorImpuestosId;
   let nombreImpuesto = inputNombreImpuesto.value;
   let porcentajeImpuesto = parseInt(inputPorcentajeImpuesto.value);
   const NombreImpuestoExiste = impuestos.some(
@@ -180,12 +180,13 @@ function actualizaDolaresStorage() {
   localStorage.setItem("dolares", dolaresJSON);
 }
 
-function obtenerMaxIdImpuestosStorage() {
-  const idImpuestosStorage = impuestos.map((impuesto)=> impuesto.idImpuesto)
-      console.log(idImpuestosStorage)
-      const maxIdImpuestosStorage = Math.max(...idImpuestosStorage)
-      console.log(maxIdImpuestosStorage)
-      // return maxIdImpuestoStorage
+function obtenerMaxIdImpuestos() {
+  let maxIdImpuestos = 0
+  if (impuestos.length > 0) {
+        const idImpuestos = impuestos.map((impuesto)=> impuesto.idImpuesto)
+      maxIdImpuestos = Math.max(...idImpuestos) 
+  }
+  return maxIdImpuestos
 }
 
 //Obtener desde Storage
@@ -281,6 +282,7 @@ function eliminarImpuesto(idImpuesto) {
   impuestos.splice(indiceBorrar, 1);
   columnaImpuestoBorrar.remove();
   actualizaImpuestosStorage();
+  obtenerMaxIdImpuestos()
 }
 
 //Muestra Cards Impuestos
@@ -393,8 +395,6 @@ function main() {
   // obtenerImpuestosStorage();
   obtenerDolaresServer();
   // obtenerDolaresStorage();
-  console.log("impuestos")
-  obtenerMaxIdImpuestosStorage()
 }
 
 //Ejecuta / Llama a main
