@@ -143,10 +143,6 @@ function validarFormularioDolares(event) {
     );
     dolares.push(dolar);
 
-    console.log(JSON.stringify(dolares));
-    console.log(totalPorcentaje);
-    console.log(ImpuestosAplicados);
-
     formularioDolares.reset();
     pintarDolares();
     desmarcarCheckboxImpuestos();
@@ -199,13 +195,28 @@ function obtenerDolaresStorage() {
   }
 }
 //Obtener desde .json
+function obtenerImpuestosServer() {
+  fetch("./tiposDeImpuesto.json")
+    .then((response) => {
+      response.json();
+    })
+    .then((jsonResponse) => {
+      impuestos = jsonResponse;
+      console.log(impuestos);
+      pintarImpuestos();
+    });
+}
+
 function obtenerDolaresServer() {
   fetch("./tiposDeDolar.json")
     .then((response) => {
       response.json();
     })
-    .then((jsonResponse) => (dolares = jsonResponse));
-  pintarDolares();
+    .then((jsonResponse) => {
+      dolares = jsonResponse;
+      console.log(dolares);
+      pintarDolares();
+    });
 }
 
 function obtenerDolaresStorage() {
@@ -239,14 +250,10 @@ function obtieneDolarOficialDeDolarSi() {
       }
     })
     .then((data) => {
-      console.log(data);
       precioDolarBancoNacion = parseFloat(data[0].casa.venta);
       document.getElementById("inputPrecioDolarBancoNacion").value =
         precioDolarBancoNacion;
       pintarDolares();
-      // console.log("InputPrecioDolarBancoNacion:", inputPrecioDolarBancoNacion);
-      // console.log("precioDolarBancoNacion:", precioDolarBancoNacion);
-      // console.log(typeof precioDolarBancoNacion);
     })
     .catch((error) => {
       console.error(error);
@@ -376,7 +383,6 @@ function main() {
   obtenerImpuestosStorage();
   // obtenerDolaresStorage();
   obtenerDolaresServer();
-  console.log(JSON.stringify(dolares));
 }
 
 //Ejecuta / Llama a main
