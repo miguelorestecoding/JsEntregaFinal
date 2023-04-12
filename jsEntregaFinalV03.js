@@ -109,7 +109,7 @@ function validarFormularioImpuestos(event) {
     impuestos.push(impuesto);
     formularioImpuestos.reset();
     pintarImpuestos();
-    actulizaImpuestosStorage();
+    actualizaImpuestosStorage();
   } else {
     alert("Ya existe un impuesto con ese nombre, utiliza otro");
   }
@@ -146,7 +146,7 @@ function validarFormularioDolares(event) {
     formularioDolares.reset();
     pintarDolares();
     desmarcarCheckboxImpuestos();
-    actulizaDolaresStorage();
+    actualizaDolaresStorage();
   } else {
     Swal.fire({
       icon: "error",
@@ -170,11 +170,11 @@ function actualizaDolarBancoNacionStorage() {
   precioDolarBancoNacion = inputPrecioDolarBancoNacion.value;
   localStorage.setItem("precioDolarBancoNacion", precioDolarBancoNacion);
 }
-function actulizaImpuestosStorage() {
+function actualizaImpuestosStorage() {
   let impuestosJSON = JSON.stringify(impuestos);
   localStorage.setItem("impuestos", impuestosJSON);
 }
-function actulizaDolaresStorage() {
+function actualizaDolaresStorage() {
   let dolaresJSON = JSON.stringify(dolares);
   localStorage.setItem("dolares", dolaresJSON);
 }
@@ -198,11 +198,12 @@ function obtenerDolaresStorage() {
 function obtenerImpuestosServer() {
   fetch("./tiposDeImpuesto.json")
     .then((response) => {
-      response.json();
+      return response.json();
     })
     .then((jsonResponse) => {
       impuestos = jsonResponse;
-      console.log(impuestos);
+      actualizaImpuestosStorage()
+      actualizaDolaresStorage()
       pintarImpuestos();
     });
 }
@@ -210,12 +211,12 @@ function obtenerImpuestosServer() {
 function obtenerDolaresServer() {
   fetch("./tiposDeDolar.json")
     .then((response) => {
-      response.json();
+      return response.json();
     })
     .then((jsonResponse) => {
       dolares = jsonResponse;
-      console.log(dolares);
       pintarDolares();
+      actualizaDolaresStorage();
     });
 }
 
@@ -245,14 +246,13 @@ function obtieneDolarOficialDeDolarSi() {
     .then((response) => {
       if (response.ok) {
         return response.json();
-      } else {
-        throw new Error("Error en la solicitud: " + response.statusText);
-      }
+      } 
     })
     .then((data) => {
       precioDolarBancoNacion = parseFloat(data[0].casa.venta);
       document.getElementById("inputPrecioDolarBancoNacion").value =
         precioDolarBancoNacion;
+        actualizaDolarBancoNacionStorage()
       pintarDolares();
     })
     .catch((error) => {
@@ -271,7 +271,7 @@ function eliminarImpuesto(idImpuesto) {
   );
   impuestos.splice(indiceBorrar, 1);
   columnaImpuestoBorrar.remove();
-  actulizaImpuestosStorage();
+  actualizaImpuestosStorage();
 }
 
 //Muestra Cards Impuestos
@@ -371,7 +371,7 @@ function eliminarDolar(idDolar) {
   let indiceBorrar = dolares.findIndex((dolar) => dolar.idDolar === idDolar);
   dolares.splice(indiceBorrar, 1);
   columnaDolarBorrar.remove();
-  actulizaDolaresStorage();
+  actualizaDolaresStorage();
 }
 
 //Función main
@@ -380,9 +380,10 @@ function main() {
   inicializarElementos();
   inicializarEventos();
   actualizaDolarBancoNacionStorage();
-  obtenerImpuestosStorage();
-  // obtenerDolaresStorage();
+  obtenerImpuestosServer()
+  // obtenerImpuestosStorage();
   obtenerDolaresServer();
+  // obtenerDolaresStorage();
 }
 
 //Ejecuta / Llama a main
