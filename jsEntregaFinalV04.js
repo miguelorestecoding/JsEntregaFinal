@@ -187,10 +187,9 @@ function obtenerMaxIdImpuestos() {
 function obtenerMaxIdDolares() {
   let maxIdDolares = 0
   if (dolares.length > 0) {
-        const idDolares = dolares.map((dolar)=> dolares.idDolar)
+        const idDolares = dolares.map((dolar)=> dolar.idDolar)
       maxIdDolares = Math.max(...idDolares) 
   }
-  console.log(maxIdDolares)
   return maxIdDolares
 }
 
