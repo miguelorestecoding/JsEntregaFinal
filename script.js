@@ -7,13 +7,11 @@ let inputPrecioDolarBancoNacion;
 let precioDolarBancoNacion;
 
 let formularioImpuestos;
-let contadorImpuestosId = 0;
 let inputNombreImpuesto;
 let inputPorcentajeImpuesto;
 let contenedorImpuestos;
 
 let formularioDolares;
-let contadorDolaresId = 0;
 let inputNombreDolar;
 let inputImpuestosAplicados;
 let contenedorDolares;
@@ -88,8 +86,7 @@ function validarFormularioPrecioDolarBancoNacion(event) {
 // Valida Formulario Impuestos
 function validarFormularioImpuestos(event) {
   event.preventDefault();
-  contadorImpuestosId++;
-  let idImpuesto = contadorImpuestosId;
+  let idImpuesto = parseInt(obtenerMaxIdImpuestos()) + 1
   let nombreImpuesto = inputNombreImpuesto.value;
   let porcentajeImpuesto = parseInt(inputPorcentajeImpuesto.value);
   const NombreImpuestoExiste = impuestos.some(
@@ -125,8 +122,7 @@ function validarFormularioDolares(event) {
   checkboxesImpuestosAplicados.forEach((checkbox) => {
     inputImpuestosAplicados.push(JSON.parse(checkbox.value));
   });
-  contadorDolaresId++;
-  let idDolar = contadorDolaresId;
+  let idDolar = parseInt(obtenerMaxIdDolares()) + 1
   let nombreDolar = inputNombreDolar.value;
   let ImpuestosAplicados = inputImpuestosAplicados;
   let totalPorcentaje = 0;
@@ -178,6 +174,25 @@ function actualizaDolaresStorage() {
   let dolaresJSON = JSON.stringify(dolares);
   localStorage.setItem("dolares", dolaresJSON);
 }
+
+function obtenerMaxIdImpuestos() {
+  let maxIdImpuestos = 0
+  if (impuestos.length > 0) {
+        const idImpuestos = impuestos.map((impuesto)=> impuesto.idImpuesto)
+      maxIdImpuestos = Math.max(...idImpuestos) 
+  }
+  return maxIdImpuestos
+}
+
+function obtenerMaxIdDolares() {
+  let maxIdDolares = 0
+  if (dolares.length > 0) {
+        const idDolares = dolares.map((dolar)=> dolar.idDolar)
+      maxIdDolares = Math.max(...idDolares) 
+  }
+  return maxIdDolares
+}
+
 
 //Obtener desde Storage
 function obtenerImpuestosStorage() {
@@ -272,6 +287,7 @@ function eliminarImpuesto(idImpuesto) {
   impuestos.splice(indiceBorrar, 1);
   columnaImpuestoBorrar.remove();
   actualizaImpuestosStorage();
+  obtenerMaxIdImpuestos()
 }
 
 //Muestra Cards Impuestos
@@ -323,7 +339,6 @@ function pintarDolares() {
   contenedorDolares.innerHTML = "";
   dolares.forEach((dolar) => {
     let column = document.createElement("div");
-    // let listaImpuestos = document.createElement("ul");
     column.className = "col-md-4 mt-3";
     column.id = `columnaDolar-${dolar.idDolar}`;
     column.innerHTML = `
@@ -374,6 +389,36 @@ function eliminarDolar(idDolar) {
   actualizaDolaresStorage();
 }
 
+//Instrucciones
+let instrucciones = document.getElementById("instrucciones");
+instrucciones.onclick = () => muestraInstrucciones();
+
+function muestraInstrucciones() {
+  Swal.fire({
+  title: '<strong>¿Como funciona la página?</strong>',
+  icon: 'info',
+  html:
+    '<b>* Al ingresar:</b>, ' +
+    '<p>- El valor del Dolar Oficial banco Nación es tomado de la API de DolarSi</p> ' +
+    '<p>- Los tipos de impuestos y tipos de Dolares que se pintan son tomados a traves de un fetch de un json local.</p> ' +
+    '<p>- El Storage se actualiza con esta información.</p> ' +
+    '<p>* Se puede cambiar el valor de la cotización a mano y la página recalcula el precio del dolar. Se modifica el DOM para informar que valor es el que se está mostrando. </p> ' +
+    '<p>* Todo lo existente puede ser eliminado. A la vez pueden crearse nuevos tipos de impuesto y nuevos tipos de dolares. Todo se actualiza en el Storage.</p> ' +
+    '<p>* Al recargar vuelve a la configuración inicial.</p> ' +
+    '',
+  showCloseButton: true,
+  showCancelButton: false,
+  focusConfirm: false,
+  confirmButtonText:
+    '<i class="fa fa-thumbs-up"></i> Comprendido!',
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+  cancelButtonText:
+    '<i class="fa fa-thumbs-down"></i>',
+  cancelButtonAriaLabel: 'Thumbs down'
+})
+}
+
+
 //Función main
 function main() {
   obtieneDolarOficialDeDolarSi();
@@ -388,7 +433,3 @@ function main() {
 
 //Ejecuta / Llama a main
 main();
-
-/* Pendiente
- * Si los nombres del dolar tienen espacio da error al querer pasar a JSON.
- */
