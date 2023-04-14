@@ -389,6 +389,36 @@ function eliminarDolar(idDolar) {
   actualizaDolaresStorage();
 }
 
+//Instrucciones
+let instrucciones = document.getElementById("instrucciones");
+instrucciones.onclick = () => muestraInstrucciones();
+
+function muestraInstrucciones() {
+  Swal.fire({
+  title: '<strong>¿Como funciona la página?</strong>',
+  icon: 'info',
+  html:
+    '<b>* Al ingresar:</b>, ' +
+    '<p>- El valor del Dolar Oficial banco Nación es tomado de la API de DolarSi</p> ' +
+    '<p>- Los tipos de impuestos y tipos de Dolares que se pintan son tomados a traves de un fetch de un json local.</p> ' +
+    '<p>- El Storage se actualiza con esta información.</p> ' +
+    '<p>* Se puede cambiar el valor de la cotización a mano y la página recalcula el precio del dolar. Se modifica el DOM para informar que valor es el que se está mostrando. </p> ' +
+    '<p>* Todo lo existente puede ser eliminado. A la vez pueden crearse nuevos tipos de impuesto y nuevos tipos de dolares. Todo se actualiza en el Storage.</p> ' +
+    '<p>* Al recargar vuelve a la configuración inicial.</p> ' +
+    '',
+  showCloseButton: true,
+  showCancelButton: false,
+  focusConfirm: false,
+  confirmButtonText:
+    '<i class="fa fa-thumbs-up"></i> Comprendido!',
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+  cancelButtonText:
+    '<i class="fa fa-thumbs-down"></i>',
+  cancelButtonAriaLabel: 'Thumbs down'
+})
+}
+
+
 //Función main
 function main() {
   obtieneDolarOficialDeDolarSi();
